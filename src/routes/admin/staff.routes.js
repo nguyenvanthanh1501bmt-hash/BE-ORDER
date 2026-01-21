@@ -3,7 +3,8 @@ import {
     createStaff, 
     deleteStaff, 
     getStaffList,
-    resetPasswordStaff, 
+    resetPasswordStaff,
+    updateStaff, 
 } from '../../controllers/admin/staff.controller.js'
 
 const router = express.Router()
@@ -19,5 +20,8 @@ router.get('/staff', getStaffList)
 
 // POST /api/admin/staff (resetpasss)
 router.post('/staff/reset-password', resetPasswordStaff)
+
+// PUT /api/admin/staff
+router.put('/staff', updateStaff)
 
 export default router

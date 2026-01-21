@@ -93,3 +93,33 @@ export async function resetPassWordStaffService(email) {
 
     return { message: 'Reset password email sent' }
 }
+
+export async function updateStaffService(user_id, email, name, role) {
+  if (!user_id) throw new Error('User_id is required')
+
+  const { data: authData, error: authError } =
+    await supabaseAdmin.auth.admin.updateUserById(user_id, {
+      ...(email && { email }),
+      ...(name && { user_metadata: { name } }),
+    })
+  if (authError) throw authError
+
+  const { data: staffData, error: staffError } =
+    await supabaseAdmin
+      .from('staff')
+      .update({
+        ...(email && { email }),
+        ...(name && { name }),
+        ...(role && { role }),
+      })
+      .eq('user_id', user_id)
+      .select()
+
+  if (staffError) throw staffError
+
+  return { authData, staffData }
+}
+
+
+
+

@@ -2,7 +2,8 @@ import {
   createStaffService, 
   deleteStaffService, 
   getStaffListService,
-  resetPassWordStaffService, 
+  resetPassWordStaffService,
+  updateStaffService, 
 } from '../../services/admin/staff.service.js'
 
 export async function createStaff(req, res, next) {
@@ -49,6 +50,17 @@ export async function resetPasswordStaff(req, res, next) {
     const result = await resetPassWordStaffService(email)
     res.json(result)
   } catch (err){
+    next(err)
+  }
+}
+
+export async function updateStaff(req, res, next) {
+  try{
+    const { user_id, email, name, role } = req.body
+
+    const result = await updateStaffService(user_id, email, name, role)
+    res.json(result)
+  } catch (err) {
     next(err)
   }
 }
