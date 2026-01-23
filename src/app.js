@@ -5,6 +5,8 @@ import staffRoutes from './routes/admin/staff.routes.js'
 import billRouters from './routes/bill/bill.routes.js'
 import imageRouters from './routes/image/image.routes.js'
 import foodRouters from './routes/food/food.routes.js'
+import orderItemRouters from './routes/order_item/order_item.routes.js'
+import orderRouter from './routes/order/order.routes.js'
 
 import { errorHandler } from './middlewares/errorHandler.js'
 
@@ -26,6 +28,12 @@ app.use('/api/bill', billRouters)
 
 //food
 app.use('/api/food', foodRouters)
+
+//order item
+app.use('/api/order_items', orderItemRouters)
+
+//order
+app.use('/api/orders', orderRouter)
 
 // luôn đặt CUỐI
 app.use(errorHandler)
